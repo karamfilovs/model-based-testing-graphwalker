@@ -89,4 +89,8 @@ public class LoginPage extends BasePage {
         assertEquals(expectedText, companyNameDiv.getText(), "Company name text is not as expected");
     }
 
+    public String getCompanyName(){
+        return getText(companyNameDiv);
+    }
+
 }

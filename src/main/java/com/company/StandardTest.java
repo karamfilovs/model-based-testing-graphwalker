@@ -1,5 +1,6 @@
 package com.company;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +12,7 @@ public class StandardTest extends BaseTest {
     @BeforeEach
     public void login() {
         inv.loginPage().gotoPage();
-        inv.loginPage().verifyCompanyName(COMPANY_NAME);
+        Assertions.assertEquals(inv.loginPage().getCompanyName(), COMPANY_NAME);
         inv.loginPage().enterEmail(EMAIL);
         inv.loginPage().enterPassword(PASSWORD);
         inv.loginPage().clickLoginButton();
@@ -20,21 +21,25 @@ public class StandardTest extends BaseTest {
 
     @Test
     public void canLoginSuccessfullyWithValidCredentials() {
-        inv.homePage().verifyLoggedUser(EMAIL);
+        Assertions.assertEquals(inv.homePage().getUserPanelText(), EMAIL);
+//        inv.homePage().verifyLoggedUser(EMAIL);
     }
 
     @Test
     public void canLogoutSuccessfully() {
         inv.homePage().verifyLoggedUser(EMAIL);
         inv.homePage().clickLogoutLink();
-        inv.loginPage().verifyCompanyName(COMPANY_NAME);
+        Assertions.assertEquals(inv.loginPage().getCompanyName(), COMPANY_NAME);
+//        inv.loginPage().verifyCompanyName(COMPANY_NAME);
     }
 
     @Test
     public void canNavigateToHomePageViaHeader() {
-        inv.homePage().verifyLoggedUser(EMAIL);
+        Assertions.assertEquals(inv.homePage().getUserPanelText(), EMAIL);
+//        inv.homePage().verifyLoggedUser(EMAIL);
         inv.homePage().clickCompanyLogo();
-        inv.homePage().verifyLoggedUser(EMAIL);
+        Assertions.assertEquals(inv.homePage().getUserPanelText(), EMAIL);
+//        inv.homePage().verifyLoggedUser(EMAIL);
     }
 
 
@@ -42,6 +47,7 @@ public class StandardTest extends BaseTest {
     public void canNavigateToItemsPage() {
         inv.homePage().verifyLoggedUser(EMAIL);
         inv.itemsPage().clickItemsLink();
-        inv.itemsPage().verifyHeadlineText("Артикули");
+        Assertions.assertEquals(inv.itemsPage().getHeadlineText(), "Артикули");
+//        inv.itemsPage().verifyHeadlineText("Артикули");
     }
 }

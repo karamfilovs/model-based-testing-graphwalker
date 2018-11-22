@@ -3,6 +3,7 @@ package com.company;
 import core.Inv;
 import org.graphwalker.core.machine.ExecutionContext;
 import org.graphwalker.java.annotation.GraphWalker;
+import org.junit.jupiter.api.Assertions;
 
 /**
  * See: http://graphwalker.org/docs/maven_archetype for more details
@@ -34,7 +35,8 @@ public class ModelBasedTest extends ExecutionContext implements InvModel {
 
     @Override
     public void v_VerifyAtLoginPage() {
-        inv.loginPage().verifyCompanyName("QA Ground");
+        Assertions.assertEquals(inv.loginPage().getCompanyName(), "QA Ground");
+        // inv.loginPage().verifyCompanyName("QA Ground");
 
 
     }

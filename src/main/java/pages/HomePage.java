@@ -59,6 +59,14 @@ public class HomePage extends BasePage {
     }
 
     /**
+     * Retrieves text from user panel
+     * @return text
+     */
+    public String getUserPanelText(){
+        return getText(userPanel);
+    }
+
+    /**
      *
      * @param expectedText
      */

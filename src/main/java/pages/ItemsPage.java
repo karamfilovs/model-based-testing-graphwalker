@@ -41,6 +41,14 @@ public class ItemsPage extends BasePage {
     }
 
     /**
+     * Retrieves headline text
+     * @return text
+     */
+    public String getHeadlineText(){
+        return getText(headline);
+    }
+
+    /**
      * Clicks on Items link
      */
     public void clickItemsLink(){
