@@ -1,8 +1,6 @@
 package com.company;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 public class StandardTest extends BaseTest {
     private final String COMPANY_NAME = "QA Ground";
@@ -11,28 +9,43 @@ public class StandardTest extends BaseTest {
 
     @BeforeEach
     public void login() {
+        //Move all login steps here to avoid duplication
+    }
+
+
+    @Test
+    @DisplayName("Can login successfully")
+    @Tag("high")
+    public void canLoginSuccessfullyWithValidCredentials() {
         inv.loginPage().gotoPage();
         Assertions.assertEquals(inv.loginPage().getCompanyName(), COMPANY_NAME);
         inv.loginPage().enterEmail(EMAIL);
         inv.loginPage().enterPassword(PASSWORD);
         inv.loginPage().clickLoginButton();
-    }
-
-
-    @Test
-    public void canLoginSuccessfullyWithValidCredentials() {
         Assertions.assertEquals(inv.homePage().getUserPanelText(), EMAIL);
     }
 
     @Test
+    @DisplayName("Can logout successfully")
+    @Tag("high")
     public void canLogoutSuccessfully() {
-        inv.homePage().verifyLoggedUser(EMAIL);
+        inv.loginPage().gotoPage();
+        Assertions.assertEquals(inv.loginPage().getCompanyName(), COMPANY_NAME);
+        inv.loginPage().enterEmail(EMAIL);
+        inv.loginPage().enterPassword(PASSWORD);
+        inv.loginPage().clickLoginButton();
+        Assertions.assertEquals(inv.homePage().getUserPanelText(), EMAIL);
         inv.homePage().clickLogoutLink();
         Assertions.assertEquals(inv.loginPage().getCompanyName(), COMPANY_NAME);
     }
 
     @Test
     public void canNavigateToHomePageViaHeader() {
+        inv.loginPage().gotoPage();
+        Assertions.assertEquals(inv.loginPage().getCompanyName(), COMPANY_NAME);
+        inv.loginPage().enterEmail(EMAIL);
+        inv.loginPage().enterPassword(PASSWORD);
+        inv.loginPage().clickLoginButton();
         Assertions.assertEquals(inv.homePage().getUserPanelText(), EMAIL);
         inv.homePage().clickCompanyLogo();
         Assertions.assertEquals(inv.homePage().getUserPanelText(), EMAIL);
@@ -41,7 +54,12 @@ public class StandardTest extends BaseTest {
 
     @Test
     public void canNavigateToItemsPage() {
-        inv.homePage().verifyLoggedUser(EMAIL);
+        inv.loginPage().gotoPage();
+        Assertions.assertEquals(inv.loginPage().getCompanyName(), COMPANY_NAME);
+        inv.loginPage().enterEmail(EMAIL);
+        inv.loginPage().enterPassword(PASSWORD);
+        inv.loginPage().clickLoginButton();
+        Assertions.assertEquals(inv.homePage().getUserPanelText(), EMAIL);
         inv.itemsPage().clickItemsLink();
         Assertions.assertEquals(inv.itemsPage().getHeadlineText(), "Артикули");
     }

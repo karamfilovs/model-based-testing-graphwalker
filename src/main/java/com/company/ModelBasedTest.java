@@ -32,23 +32,17 @@ public class ModelBasedTest extends ExecutionContext implements InvModel {
         inv.startBrowser("chrome");
     }
 
-
     @Override
     public void v_LoginPage() {
         Assertions.assertEquals(inv.loginPage().getCompanyName(), "QA Ground");
-
-
     }
 
     @Override
-    public void v_HomePage() {
-        inv.homePage().verifyLoggedUser("karamfilovs@gmail.com");
+    public void v_HomePage() { inv.homePage().verifyLoggedUser("karamfilovs@gmail.com");
     }
 
     @Override
-    public void e_ClickHomePageIcon() {
-        inv.homePage().clickCompanyLogo();
-
+    public void e_ClickHomePageIcon() { inv.homePage().clickCompanyLogo();
     }
 
     @Override
@@ -72,8 +66,7 @@ public class ModelBasedTest extends ExecutionContext implements InvModel {
     }
 
     @Override
-    public void v_ItemsPage() {
-        inv.itemsPage().verifyHeadlineText("Артикули");
+    public void v_ItemsPage() { inv.itemsPage().verifyHeadlineText("Артикули");
 
     }
 }
