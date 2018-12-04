@@ -34,15 +34,14 @@ public class ModelBasedTest extends ExecutionContext implements InvModel {
 
 
     @Override
-    public void v_VerifyAtLoginPage() {
+    public void v_LoginPage() {
         Assertions.assertEquals(inv.loginPage().getCompanyName(), "QA Ground");
-        // inv.loginPage().verifyCompanyName("QA Ground");
 
 
     }
 
     @Override
-    public void v_VerifyAtHomePage() {
+    public void v_HomePage() {
         inv.homePage().verifyLoggedUser("karamfilovs@gmail.com");
     }
 
@@ -73,7 +72,7 @@ public class ModelBasedTest extends ExecutionContext implements InvModel {
     }
 
     @Override
-    public void v_VerifyAtItemsPage() {
+    public void v_ItemsPage() {
         inv.itemsPage().verifyHeadlineText("Артикули");
 
     }

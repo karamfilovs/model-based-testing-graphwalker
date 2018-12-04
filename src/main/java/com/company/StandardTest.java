@@ -22,7 +22,6 @@ public class StandardTest extends BaseTest {
     @Test
     public void canLoginSuccessfullyWithValidCredentials() {
         Assertions.assertEquals(inv.homePage().getUserPanelText(), EMAIL);
-//        inv.homePage().verifyLoggedUser(EMAIL);
     }
 
     @Test
@@ -30,16 +29,13 @@ public class StandardTest extends BaseTest {
         inv.homePage().verifyLoggedUser(EMAIL);
         inv.homePage().clickLogoutLink();
         Assertions.assertEquals(inv.loginPage().getCompanyName(), COMPANY_NAME);
-//        inv.loginPage().verifyCompanyName(COMPANY_NAME);
     }
 
     @Test
     public void canNavigateToHomePageViaHeader() {
         Assertions.assertEquals(inv.homePage().getUserPanelText(), EMAIL);
-//        inv.homePage().verifyLoggedUser(EMAIL);
         inv.homePage().clickCompanyLogo();
         Assertions.assertEquals(inv.homePage().getUserPanelText(), EMAIL);
-//        inv.homePage().verifyLoggedUser(EMAIL);
     }
 
 
@@ -48,6 +44,5 @@ public class StandardTest extends BaseTest {
         inv.homePage().verifyLoggedUser(EMAIL);
         inv.itemsPage().clickItemsLink();
         Assertions.assertEquals(inv.itemsPage().getHeadlineText(), "Артикули");
-//        inv.itemsPage().verifyHeadlineText("Артикули");
     }
 }
