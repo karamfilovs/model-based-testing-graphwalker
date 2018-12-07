@@ -71,23 +71,7 @@ public class LoginPage extends BasePage {
         enterEmail(email).enterPassword(password).clickLoginButton();
     }
 
-    /**
-     *
-     * @param expectedText
-     */
-    public void verifyLoginPageAlertText(String expectedText){
-        LOGGER.info("Checking Login page default alert text");
-        assertEquals(expectedText, loginPageAlert.getText(), "Alert text is not as expected");
-    }
 
-    /**
-     *
-     * @param expectedText
-     */
-    public void verifyCompanyName(String expectedText){
-        LOGGER.info("Checking company name is: " + expectedText);
-        assertEquals(expectedText, companyNameDiv.getText(), "Company name text is not as expected");
-    }
 
     public String getCompanyName(){
         return getText(companyNameDiv);

@@ -67,7 +67,7 @@ public class Inv {
             }
 
 
-            LOGGER.info("******************************************************************");
+            LOGGER.info("***************** STARTING TEST *****************");
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             driver.manage().deleteAllCookies();
         }

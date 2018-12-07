@@ -29,7 +29,7 @@ public class ModelBasedTest extends ExecutionContext implements InvModel {
 
     public ModelBasedTest() {
         inv = new Inv();
-        inv.startBrowser("chrome");
+        inv.startBrowser(System.getProperty("browser"));
     }
 
     @Override
@@ -38,11 +38,13 @@ public class ModelBasedTest extends ExecutionContext implements InvModel {
     }
 
     @Override
-    public void v_HomePage() { inv.homePage().verifyLoggedUser("karamfilovs@gmail.com");
+    public void v_HomePage() {
+        inv.homePage().verifyLoggedUser("karamfilovs@gmail.com");
     }
 
     @Override
-    public void e_ClickHomePageIcon() { inv.homePage().clickCompanyLogo();
+    public void e_ClickHomePageIcon() {
+        inv.homePage().clickCompanyLogo();
     }
 
     @Override
@@ -61,12 +63,45 @@ public class ModelBasedTest extends ExecutionContext implements InvModel {
     }
 
     @Override
-    public void e_ClickItemLink() {
+    public void v_EmptySearchResult() {
+        Assertions.assertEquals("Не са намерени артикули, отговарящи на зададените критерии.", inv.itemsPage().getEmptyListText());
+
+    }
+
+    @Override
+    public void e_SearchNotExistingItem() {
+        inv.itemsPage().searchItem("not-existing-item");
+    }
+
+    @Override
+    public void v_ItemsSearchPage() {
+        Assertions.assertTrue(inv.itemsPage().isSearchTableDisplayed());
+    }
+
+    @Override
+    public void e_ClickItemsLink() {
         inv.itemsPage().clickItemsLink();
     }
 
     @Override
-    public void v_ItemsPage() { inv.itemsPage().verifyHeadlineText("Артикули");
+    public void e_SearchExistingItem() {
+        inv.itemsPage().searchItem("test");
+    }
 
+    @Override
+    public void e_CloseSearchButton() {
+        inv.itemsPage().clickCloseSearchButton();
+
+    }
+
+    @Override
+    public void e_ClickSearchButton() {
+        inv.itemsPage().clickSearchButton();
+
+    }
+
+    @Override
+    public void v_ItemsPage() {
+        Assertions.assertEquals(inv.itemsPage().getHeadlineText(), "Артикули");
     }
 }
