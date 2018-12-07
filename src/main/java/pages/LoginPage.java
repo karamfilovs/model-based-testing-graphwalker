@@ -18,6 +18,10 @@ public class LoginPage extends BasePage {
     @FindBy(id = "loginpassword")
     private WebElement passwordField;
 
+
+   @FindBy(id = "newpass2")
+    private WebElement forgottenPasswordLink;
+
     @FindBy(id = "loginsubmit")
     private WebElement loginButton;
 
@@ -47,7 +51,7 @@ public class LoginPage extends BasePage {
     }
 
     public LoginPage enterPassword(String password){
-        LOGGER.info("Entering password: " + password);
+        LOGGER.info("Entering password: " + "********");
         typeText(passwordField, password);
         return this;
     }
@@ -60,6 +64,14 @@ public class LoginPage extends BasePage {
         LOGGER.info("Clicking Login button");
         click(loginButton);
         return this;
+    }
+
+    /**
+     * Clicks Forgotten Password link
+     */
+    public void clickForgottenPasswordLink(){
+        LOGGER.info("Clicking Forgotten Password link");
+        click(forgottenPasswordLink);
     }
 
     /**

@@ -23,8 +23,8 @@ import org.junit.jupiter.api.Assertions;
  * running: mvn graphwalker:generate-sources
  * also: mvn graphwalker:test
  */
-@GraphWalker(value = "random(edge_coverage(1000))", start = "e_GoToLoginPage")
-public class ModelBasedTest extends ExecutionContext implements InvModel {
+@GraphWalker(value = "random(edge_coverage(10))", start = "e_GoToLoginPage")
+public class ModelBasedTest implements InvModel {
     private Inv inv;
 
     public ModelBasedTest() {

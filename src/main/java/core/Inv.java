@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pages.ItemsPage;
 import pages.LoginPage;
+import pages.ResetPasswordPage;
 
 import java.io.File;
 import java.time.LocalTime;
@@ -33,6 +34,7 @@ public class Inv {
     private HomePage homePage;
     private LoginPage loginPage;
     private ItemsPage itemsPage;
+    private ResetPasswordPage resetPasswordPage;
 
 
     public void startBrowser(String browser) {
@@ -107,6 +109,15 @@ public class Inv {
             return itemsPage;
         } else {
             return itemsPage;
+        }
+    }
+
+    public ResetPasswordPage resetPasswordPage() {
+        if (resetPasswordPage == null) {
+            resetPasswordPage = new ResetPasswordPage(driver);
+            return resetPasswordPage;
+        } else {
+            return resetPasswordPage;
         }
     }
 
