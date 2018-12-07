@@ -5,7 +5,7 @@ import org.graphwalker.core.machine.ExecutionContext;
 import org.graphwalker.java.annotation.GraphWalker;
 import org.junit.jupiter.api.Assertions;
 
-@GraphWalker(value = "random(edge_coverage(1000))", start = "e_GoToLoginPage")
+@GraphWalker(value = "random(edge_coverage(100))", start = "e_GoToLoginPage")
 public class ResetPasswordModelTest extends ExecutionContext implements ForgottenPassword {
     private Inv inv;
 
@@ -39,7 +39,7 @@ public class ResetPasswordModelTest extends ExecutionContext implements Forgotte
 
     @Override
     public void e_ClickReturnToLoginPageLink() {
-        inv.loginPage().gotoPage();
+        inv.resetPasswordPage().clickReturnBackToLoginPageLink();
 
     }
 
