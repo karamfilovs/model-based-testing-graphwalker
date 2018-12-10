@@ -1,17 +1,18 @@
-package com.company;
+package modelbased;
 
+import com.company.ForgottenPassword;
 import core.Inv;
 import org.graphwalker.core.machine.ExecutionContext;
 import org.graphwalker.java.annotation.GraphWalker;
 import org.junit.jupiter.api.Assertions;
 
 @GraphWalker(value = "random(edge_coverage(100))", start = "e_GoToLoginPage")
-public class ResetPasswordModelTest extends ExecutionContext implements ForgottenPassword {
+public class ResetPasswordModelTest implements ForgottenPassword {
     private Inv inv;
 
     public ResetPasswordModelTest() {
         inv = new Inv();
-        inv.startBrowser(System.getProperty("browser"));
+        inv.startBrowser("chrome");
     }
 
 

@@ -1,4 +1,4 @@
-package com.company;
+package traditional;
 
 import core.ExtensionContextParameterResolver;
 import core.Inv;
