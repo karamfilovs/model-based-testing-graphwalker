@@ -1,6 +1,6 @@
 package modelbased;
 
-import com.company.InvModel;
+import com.company.InvNavigation;
 import core.Inv;
 import org.graphwalker.core.machine.ExecutionContext;
 import org.graphwalker.java.annotation.GraphWalker;
@@ -25,7 +25,7 @@ import org.junit.jupiter.api.Assertions;
  * also: mvn graphwalker:test
  */
 @GraphWalker(value = "random(edge_coverage(100))", start = "e_GoToLoginPage")
-public class InvMainNavigationTest extends ExecutionContext implements InvModel {
+public class InvMainNavigationTest extends ExecutionContext implements InvNavigation {
     private Inv inv;
 
     public InvMainNavigationTest() {

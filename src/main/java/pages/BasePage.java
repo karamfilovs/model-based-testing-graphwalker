@@ -25,15 +25,11 @@ import java.util.stream.Collectors;
 
 public class BasePage {
     public static final Logger LOGGER = LoggerFactory.getLogger(BasePage.class);
-
     protected final String BASE_URL = "http://st2016.inv.bg";
-
     protected WebDriver driver;
 
     @FindBy(how = How.XPATH, using = "//h2")
     private WebElement headerText;
-
-
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -42,7 +38,6 @@ public class BasePage {
 
     /**
      * Verifies h2 text
-     *
      * @param expectedText page header text
      */
     public void verifyHeaderText(String expectedText) {
@@ -258,13 +253,16 @@ public class BasePage {
     }
 
 
+    /**
+     * Visits logout link for quick logout
+     */
     public void quickLogout() {
         navigateTo("/logout");
 
     }
 
     /**
-     * wait specific time in miliseconds.
+     * wait specific time in milliseconds.
      *
      * @param timeInMillisecond
      */

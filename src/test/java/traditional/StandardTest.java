@@ -29,11 +29,7 @@ public class StandardTest extends BaseTest {
     @DisplayName("Can logout successfully")
     @Tag("high")
     public void canLogoutSuccessfully() {
-        inv.loginPage().gotoPage();
-        Assertions.assertEquals(COMPANY_NAME, inv.loginPage().getCompanyName());
-        inv.loginPage().enterEmail(EMAIL);
-        inv.loginPage().enterPassword(PASSWORD);
-        inv.loginPage().clickLoginButton();
+        inv.loginPage().login(EMAIL, PASSWORD);
         Assertions.assertEquals(EMAIL, inv.homePage().getUserPanelText());
         inv.homePage().clickLogoutLink();
         Assertions.assertEquals(COMPANY_NAME, inv.loginPage().getCompanyName());
@@ -41,11 +37,7 @@ public class StandardTest extends BaseTest {
 
     @Test
     public void canNavigateToHomePageViaHeader() {
-        inv.loginPage().gotoPage();
-        Assertions.assertEquals(COMPANY_NAME, inv.loginPage().getCompanyName());
-        inv.loginPage().enterEmail(EMAIL);
-        inv.loginPage().enterPassword(PASSWORD);
-        inv.loginPage().clickLoginButton();
+        inv.loginPage().login(EMAIL, PASSWORD);
         Assertions.assertEquals(EMAIL, inv.homePage().getUserPanelText());
         inv.homePage().clickCompanyLogo();
         Assertions.assertEquals(EMAIL, inv.homePage().getUserPanelText());
@@ -53,15 +45,36 @@ public class StandardTest extends BaseTest {
 
 
     @Test
+    @DisplayName("Can navigate to Items page")
     public void canNavigateToItemsPage() {
-        inv.loginPage().gotoPage();
-        Assertions.assertEquals(COMPANY_NAME, inv.loginPage().getCompanyName());
-        inv.loginPage().enterEmail(EMAIL);
-        inv.loginPage().enterPassword(PASSWORD);
-        inv.loginPage().clickLoginButton();
+        inv.loginPage().login(EMAIL, PASSWORD);
         Assertions.assertEquals(EMAIL, inv.homePage().getUserPanelText());
         inv.itemsPage().clickItemsLink();
         Assertions.assertEquals("Артикули", inv.itemsPage().getHeadlineText());
+    }
+
+    @Test
+    @DisplayName("Can search for existing items")
+    public void canSearchForExistingItems() {
+        inv.loginPage().login(EMAIL, PASSWORD);
+        Assertions.assertEquals(EMAIL, inv.homePage().getUserPanelText());
+        inv.itemsPage().clickItemsLink();
+        Assertions.assertEquals("Артикули", inv.itemsPage().getHeadlineText());
+        inv.itemsPage().clickSearchButton();
+        inv.itemsPage().searchItem("test");
+        Assertions.assertTrue(inv.itemsPage().isSearchTableDisplayed());
+    }
+
+    @Test
+    @DisplayName("Can search for not-existing items")
+    public void canSearchForNotExistingItems() {
+        inv.loginPage().login(EMAIL, PASSWORD);
+        Assertions.assertEquals(EMAIL, inv.homePage().getUserPanelText());
+        inv.itemsPage().clickItemsLink();
+        Assertions.assertEquals("Артикули", inv.itemsPage().getHeadlineText());
+        inv.itemsPage().clickSearchButton();
+        inv.itemsPage().searchItem("not-existing");
+        Assertions.assertEquals("Не са намерени артикули, отговарящи на зададените критерии.", inv.itemsPage().getEmptyListText());
     }
 
     @Test

@@ -38,18 +38,30 @@ public class LoginPage extends BasePage {
 
     /**
      * Navigates to current page
+     * @return this
      */
-    public void gotoPage() {
+    public LoginPage gotoPage() {
         LOGGER.info("Navigate to: " + BASE_URL + PAGE_URL);
         navigateTo(PAGE_URL);
+        return this;
     }
 
+    /**
+     * Enters email address
+     * @param email email
+     * @return this
+     */
     public LoginPage enterEmail(String email){
         LOGGER.info("Entering email: " + email);
         typeText(emailField, email);
         return this;
     }
 
+    /**
+     * Enters password
+     * @param password password
+     * @return this
+     */
     public LoginPage enterPassword(String password){
         LOGGER.info("Entering password: " + "********");
         typeText(passwordField, password);
@@ -57,8 +69,8 @@ public class LoginPage extends BasePage {
     }
 
     /**
-     *
-     * @return
+     * Clicks Login button
+     * @return this
      */
     public LoginPage clickLoginButton(){
         LOGGER.info("Clicking Login button");
@@ -75,16 +87,19 @@ public class LoginPage extends BasePage {
     }
 
     /**
-     *
+     * Performs login
      * @param email
      * @param password
      */
     public void login(String email, String password){
-        enterEmail(email).enterPassword(password).clickLoginButton();
+        gotoPage().enterEmail(email).enterPassword(password).clickLoginButton();
     }
 
 
-
+    /**
+     * Retrieves company name
+     * @return
+     */
     public String getCompanyName(){
         return getText(companyNameDiv);
     }

@@ -36,6 +36,9 @@ public class HomePage extends BasePage {
         navigateTo(PAGE_URL);
     }
 
+    /**
+     * Clicks on company logo at home page
+     */
     public void clickCompanyLogo(){
         LOGGER.info("Clicking on company logo/header");
         click(companyLogo);
@@ -66,12 +69,5 @@ public class HomePage extends BasePage {
         return getText(userPanel);
     }
 
-    /**
-     *
-     * @param expectedText
-     */
-    public void verifyLoggedUser(String expectedText){
-        LOGGER.info("Checking that logging user is: " + expectedText);
-        assertEquals(expectedText, userPanel.getText(), "Logged user name is not as expected");
-    }
+
 }
