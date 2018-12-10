@@ -14,15 +14,15 @@ public class StandardTest extends BaseTest {
 
 
     @Test
-    @DisplayName("Can login successfully")
+    @DisplayName("Can login successfully with valid credentials")
     @Tag("high")
     public void canLoginSuccessfullyWithValidCredentials() {
         inv.loginPage().gotoPage();
-        Assertions.assertEquals(inv.loginPage().getCompanyName(), COMPANY_NAME);
+        Assertions.assertEquals(COMPANY_NAME, inv.loginPage().getCompanyName());
         inv.loginPage().enterEmail(EMAIL);
         inv.loginPage().enterPassword(PASSWORD);
         inv.loginPage().clickLoginButton();
-        Assertions.assertEquals(inv.homePage().getUserPanelText(), EMAIL);
+        Assertions.assertEquals(EMAIL, inv.homePage().getUserPanelText());
     }
 
     @Test
@@ -30,54 +30,56 @@ public class StandardTest extends BaseTest {
     @Tag("high")
     public void canLogoutSuccessfully() {
         inv.loginPage().gotoPage();
-        Assertions.assertEquals(inv.loginPage().getCompanyName(), COMPANY_NAME);
+        Assertions.assertEquals(COMPANY_NAME, inv.loginPage().getCompanyName());
         inv.loginPage().enterEmail(EMAIL);
         inv.loginPage().enterPassword(PASSWORD);
         inv.loginPage().clickLoginButton();
-        Assertions.assertEquals(inv.homePage().getUserPanelText(), EMAIL);
+        Assertions.assertEquals(EMAIL, inv.homePage().getUserPanelText());
         inv.homePage().clickLogoutLink();
-        Assertions.assertEquals(inv.loginPage().getCompanyName(), COMPANY_NAME);
+        Assertions.assertEquals(COMPANY_NAME, inv.loginPage().getCompanyName());
     }
 
     @Test
     public void canNavigateToHomePageViaHeader() {
         inv.loginPage().gotoPage();
-        Assertions.assertEquals(inv.loginPage().getCompanyName(), COMPANY_NAME);
+        Assertions.assertEquals(COMPANY_NAME, inv.loginPage().getCompanyName());
         inv.loginPage().enterEmail(EMAIL);
         inv.loginPage().enterPassword(PASSWORD);
         inv.loginPage().clickLoginButton();
-        Assertions.assertEquals(inv.homePage().getUserPanelText(), EMAIL);
+        Assertions.assertEquals(EMAIL, inv.homePage().getUserPanelText());
         inv.homePage().clickCompanyLogo();
-        Assertions.assertEquals(inv.homePage().getUserPanelText(), EMAIL);
+        Assertions.assertEquals(EMAIL, inv.homePage().getUserPanelText());
     }
 
 
     @Test
     public void canNavigateToItemsPage() {
         inv.loginPage().gotoPage();
-        Assertions.assertEquals(inv.loginPage().getCompanyName(), COMPANY_NAME);
+        Assertions.assertEquals(COMPANY_NAME, inv.loginPage().getCompanyName());
         inv.loginPage().enterEmail(EMAIL);
         inv.loginPage().enterPassword(PASSWORD);
         inv.loginPage().clickLoginButton();
-        Assertions.assertEquals(inv.homePage().getUserPanelText(), EMAIL);
+        Assertions.assertEquals(EMAIL, inv.homePage().getUserPanelText());
         inv.itemsPage().clickItemsLink();
-        Assertions.assertEquals(inv.itemsPage().getHeadlineText(), "Артикули");
+        Assertions.assertEquals("Артикули", inv.itemsPage().getHeadlineText());
     }
 
     @Test
-    public void cantResetPasswordWithInvalidEmail(){
+    @DisplayName("Cant reset password with invalid email")
+    public void cantResetPasswordWithInvalidEmail() {
         inv.loginPage().gotoPage();
-        Assertions.assertEquals(inv.loginPage().getCompanyName(), COMPANY_NAME);
+        Assertions.assertEquals(COMPANY_NAME, inv.loginPage().getCompanyName());
         inv.loginPage().clickForgottenPasswordLink();
-        inv.resetPasswordPage().enterEmail("al@al");
+        inv.resetPasswordPage().enterEmail("invalid@email");
         inv.resetPasswordPage().clickSendButton();
         Assertions.assertEquals("Въведеният имейл е невалиден", inv.resetPasswordPage().getInvalidEmailErrorMessage());
     }
 
     @Test
-    public void cantResetPasswordWithWrongEmail(){
+    @DisplayName("Cant reset password with invalid email")
+    public void cantResetPasswordWithWrongEmail() {
         inv.loginPage().gotoPage();
-        Assertions.assertEquals(inv.loginPage().getCompanyName(), COMPANY_NAME);
+        Assertions.assertEquals(COMPANY_NAME, inv.loginPage().getCompanyName());
         inv.loginPage().clickForgottenPasswordLink();
         inv.resetPasswordPage().enterEmail("al@pragmatic.bg");
         inv.resetPasswordPage().clickSendButton();
@@ -85,12 +87,12 @@ public class StandardTest extends BaseTest {
     }
 
     @Test
-    public void canNavigateBetweenLoginPageAndForgottenPasswordPage(){
+    public void canNavigateBetweenLoginPageAndForgottenPasswordPage() {
         inv.loginPage().gotoPage();
-        Assertions.assertEquals(inv.loginPage().getCompanyName(), COMPANY_NAME);
+        Assertions.assertEquals(COMPANY_NAME, inv.loginPage().getCompanyName());
         inv.loginPage().clickForgottenPasswordLink();
         Assertions.assertEquals("Възстановяване на парола", inv.resetPasswordPage().getPageHeaderText());
         inv.resetPasswordPage().clickReturnBackToLoginPageLink();
-        Assertions.assertEquals(inv.loginPage().getCompanyName(), COMPANY_NAME);
+        Assertions.assertEquals(COMPANY_NAME, inv.loginPage().getCompanyName());
     }
 }
