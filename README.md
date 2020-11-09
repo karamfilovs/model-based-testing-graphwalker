@@ -1,6 +1,8 @@
 # dev
 Dev.bg lecture
 
-# Test Execution
+# Generate interfaces from the models
 mvn graphwalker:generate-sources
+
+# Execute tests
 mvn graphwalker:test
