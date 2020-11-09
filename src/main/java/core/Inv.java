@@ -1,5 +1,7 @@
 package core;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.InvalidArgumentException;
 import pages.HomePage;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.SystemUtils;
@@ -24,12 +26,6 @@ public class Inv {
     private static final Logger LOGGER = LoggerFactory.getLogger(Inv.class);
     private WebDriver driver;
 
-    //Drivers paths
-    private final String WINDOWS_CHROME_DRIVER_PATH = "src\\main\\resources\\webdrivers\\chromedriver.exe";
-    private final String WINDOWS_FIREFOX_DRIVER_PATH = "src\\main\\resources\\webdrivers\\geckodriver.exe";
-    private final String LINUX_CHROME_DRIVER_PATH = "src/main/resources/webdrivers/linux-chromedriver-v2.42";
-    private final String LINUX_FIREFOX_DRIVER_PATH = "src/main/resources/webdrivers/linux-geckodriver-v0.22.0";
-
     //pages
     private HomePage homePage;
     private LoginPage loginPage;
@@ -38,46 +34,22 @@ public class Inv {
 
 
     public void startBrowser(String browser) {
-        if (SystemUtils.IS_OS_LINUX) {
-            if (browser.equalsIgnoreCase("chrome")) {
-                System.setProperty("webdriver.chrome.driver", LINUX_CHROME_DRIVER_PATH);
-                ChromeOptions options = new ChromeOptions();
-                options.setHeadless(isHeadless());
-                options.addArguments("--window-size=1920,1080");
-                driver = new ChromeDriver(options);
-            } else if (browser.equalsIgnoreCase("firefox")) {
-                System.setProperty("webdriver.gecko.driver", LINUX_FIREFOX_DRIVER_PATH);
-                FirefoxOptions options = new FirefoxOptions();
-                options.addArguments("-width=1920");
-                options.addArguments("-height=1080");
-                options.setHeadless(isHeadless());
-                driver = new FirefoxDriver(options);
-            } else {
-                throw new RuntimeException("Not supported browser");
-            }
+        if (browser.equalsIgnoreCase("chrome")) {
+            WebDriverManager.chromedriver().setup();
+            driver = new ChromeDriver();
+        } else if (browser.equalsIgnoreCase("firefox")) {
+            WebDriverManager.firefoxdriver().setup();
+            driver = new FirefoxDriver();
         } else {
-            if (browser.equalsIgnoreCase("chrome")) {
-                System.setProperty("webdriver.chrome.driver", WINDOWS_CHROME_DRIVER_PATH);
-                driver = new ChromeDriver();
-                driver.manage().window().maximize();
-            } else if (browser.equalsIgnoreCase("firefox")) {
-                System.setProperty("webdriver.gecko.driver", WINDOWS_FIREFOX_DRIVER_PATH);
-                driver = new FirefoxDriver();
-                driver.manage().window().maximize();
-            } else {
-                throw new RuntimeException("Not supported browser");
-            }
-
-
-            LOGGER.info("***************** STARTING TEST *****************");
-            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-            driver.manage().deleteAllCookies();
+            throw new InvalidArgumentException("Not supported browser");
         }
+
+        LOGGER.info("***************** STARTING TEST *****************");
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().deleteAllCookies();
     }
 
-    private boolean isHeadless() {
-        return System.getProperty("headless").equalsIgnoreCase("on") ? true : false;
-    }
 
     public void quit() {
         driver.quit();
