@@ -25,7 +25,7 @@ import org.junit.jupiter.api.Assertions;
  * also: mvn graphwalker:test
  */
 @GraphWalker(value = "random(edge_coverage(100))", start = "e_GoToLoginPage")
-public class InvMainNavigationTest extends ExecutionContext  implements InvNavigation {
+public class InvMainNavigationTest extends ExecutionContext implements InvNavigation {
     private Inv inv;
 
     public InvMainNavigationTest() {

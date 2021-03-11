@@ -1,5 +1,4 @@
-# dev
-Dev.bg lecture
+# Demo of Model-Based Testing(State Testing)
 
 # Generate interfaces from the models
 mvn graphwalker:generate-sources

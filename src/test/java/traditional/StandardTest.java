@@ -36,6 +36,7 @@ public class StandardTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Can navigate to home page via header")
     public void canNavigateToHomePageViaHeader() {
         inv.loginPage().login(EMAIL, PASSWORD);
         Assertions.assertEquals(EMAIL, inv.homePage().getUserPanelText());
@@ -100,6 +101,7 @@ public class StandardTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Can navigate between Login page and Forgotten password page")
     public void canNavigateBetweenLoginPageAndForgottenPasswordPage() {
         inv.loginPage().gotoPage();
         Assertions.assertEquals(COMPANY_NAME, inv.loginPage().getCompanyName());
