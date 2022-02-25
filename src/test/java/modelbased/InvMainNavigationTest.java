@@ -25,7 +25,7 @@ import org.junit.jupiter.api.Assertions;
  * also: mvn graphwalker:test
  */
 @GraphWalker(value = "random(edge_coverage(100))", start = "e_GoToLoginPage")
-public class InvMainNavigationTest extends ExecutionContext implements InvNavigation {
+public class InvMainNavigationTest  implements InvNavigation {
     private Inv inv;
 
     public InvMainNavigationTest() {
@@ -40,7 +40,6 @@ public class InvMainNavigationTest extends ExecutionContext implements InvNaviga
 
     @Override
     public void v_HomePage() {
-
         Assertions.assertEquals("karamfilovs@gmail.com", inv.homePage().getUserPanelText());
     }
 

@@ -7,7 +7,7 @@ import org.graphwalker.java.annotation.GraphWalker;
 import org.junit.jupiter.api.Assertions;
 
 @GraphWalker(value = "random(edge_coverage(100))", start = "e_GoToLoginPage")
-public class ResetPasswordModelTest implements ForgottenPassword {
+public class ResetPasswordModelTest extends  ExecutionContext implements ForgottenPassword {
     private Inv inv;
 
     public ResetPasswordModelTest() {
